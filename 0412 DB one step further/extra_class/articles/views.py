@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 
@@ -42,9 +42,7 @@ def create(request):
                     # 2. 클릭시 Hash 태그 기준으로 filter 해주기
                     # 3. 게시물 수정 시, 새로 등록된 해시태그 검사 해주기
 
-                    # created가 True라면
-                    if created:
-                        article.hashtag.add(hashtag)
+                    article.hashtags.add(hashtag)
 
             return redirect('articles:detail', article.pk)
     else:
@@ -52,6 +50,19 @@ def create(request):
 
     context = {'form': form}
     return render(request, 'articles/create.html', context)
+
+# 2. 클릭시 Hash 태그 기준으로 filter 해주기
+# 특정 해시태그를 포함한 글 리스트 보여주기
+def hashtag_filtering(request, hash_pk):
+    hashtag = get_object_or_404(Hashtag, pk=hash_pk)
+    articles = hashtag.article_set.order_by('-pk')
+
+    context = {
+        'hashtag': hashtag,
+        'articles': articles,
+    }
+
+    return render(request, 'articles/hashtag.html', context)
 
 
 def delete(request, pk):
