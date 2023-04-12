@@ -1,0 +1,33 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "title": "test 제목",
+        "content": "test 내용",
+        "image": "",
+        "created_at": "2023-04-12T00:08:21.653Z",
+        "updated_at": "2023-04-12T00:08:21.653Z",
+        "like_users": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "title": "temp 제목",
+        "content": "temp 내용",
+        "image": "",
+        "created_at": "2023-04-12T00:09:21.145Z",
+        "updated_at": "2023-04-12T00:09:21.145Z",
+        "like_users": [
+            1
+        ]
+    }
+}
+]
